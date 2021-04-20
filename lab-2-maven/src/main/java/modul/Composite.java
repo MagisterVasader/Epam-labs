@@ -27,10 +27,6 @@ public class Composite implements Component {
         this.text = text;
     }
 
-    public void sort(SymbolComparator comparator) {
-        getText().sort(comparator);
-    }
-
     @Override
     public int inclusion(char symbol) {
         for (Component component : text) {

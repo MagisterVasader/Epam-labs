@@ -11,6 +11,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+
+    public static void sort(Composite composite,SymbolComparator comparator) {
+        composite.getText().sort(comparator);
+    }
+
     public static Composite parsingText() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("./target/classes/inputText.txt"));
         Composite composite = new Composite(new ArrayList<>());
@@ -48,10 +53,7 @@ public class Main {
         return composite;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        char symbol = 'e';
-        Composite composite = parsingText();
-        composite.sort(new SymbolComparator(symbol));
+    public static void show(Composite composite){
         int counter = 0;
         for (Component component: composite.getText()) {
             if (counter == 10){
@@ -61,5 +63,12 @@ public class Main {
             System.out.print(component);
             counter++;
         }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        char symbol = ' ';
+        Composite composite = parsingText();
+        sort(composite,new SymbolComparator(symbol));
+        show(composite);
     }
 }
