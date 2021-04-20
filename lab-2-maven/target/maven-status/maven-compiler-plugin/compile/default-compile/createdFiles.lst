@@ -1,1 +1,5 @@
 Main.class
+comporators\SymbolComparator.class
+modul\Component.class
+modul\Composite.class
+modul\Word.class

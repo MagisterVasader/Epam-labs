@@ -1,0 +1,37 @@
+    hello_world hello-world hello.world hello world helloWorld _hello_world.
+        var the_number_of_days_in_december_;
+        the_number_of_days_in_december_.method();
+    Ключевое слово var означает переменную.
+    Чтобы переменная существовала, её нужно объявить. Объявление переменных служит в роли свидетельства о
+«рождении» для данных. Давайте посмотрим на пример:
+    For you, the customer, the main thing is that now you don't need to know anything about the order structure.
+You call the method for getting the price, it returns a figure, and you are not drowning in mountains of
+cardboard and tape.
+    Бла бла бла.
+
+        #include <iostream>
+
+        using namespace std;
+
+        void out(int* mas, int n) {
+            for (int i = 0; i < n; ++i)
+                cout << mas[i] << ' ';
+            cout << endl;
+        }
+        int main()
+        {
+            int n;
+            cin >> n;
+            int* array = new int[n];
+            for (int i = 0; i < n; ++i)
+                cin >> array[i];
+            /*
+            sortingByChoice(array, n);
+            out(array, n);
+            cout << endl;
+            //*/
+
+            return 0;
+        }
+    Спасибо за внимание! mia@mail.ru +375(33)123-45-67
+    Thank you for attention! mia.maa@mail.ru +375(29)987-65-43

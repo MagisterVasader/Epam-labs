@@ -1,18 +1,17 @@
 package modul;
 
 public class Word implements Component{
+    private String word;
 
-    private StringBuffer word;
-
-    public Word(StringBuffer word) {
+    public Word(String word) {
         this.word = word;
     }
 
-    public StringBuffer getWord() {
+    public String getWord() {
         return word;
     }
 
-    public void setWord(StringBuffer word) {
+    public void setWord(String word) {
         this.word = word;
     }
 
@@ -29,8 +28,6 @@ public class Word implements Component{
 
     @Override
     public String toString() {
-        return "Word{" +
-                "word=" + word +
-                '}';
+        return word + " ";
     }
 }

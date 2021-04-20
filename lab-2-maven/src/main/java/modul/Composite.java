@@ -1,5 +1,7 @@
 package modul;
 
+import comporators.SymbolComparator;
+
 import java.util.List;
 
 public class Composite implements Component {
@@ -23,6 +25,10 @@ public class Composite implements Component {
 
     public void setText(List<Component> text) {
         this.text = text;
+    }
+
+    public void sort(SymbolComparator comparator) {
+        getText().sort(comparator);
     }
 
     @Override
