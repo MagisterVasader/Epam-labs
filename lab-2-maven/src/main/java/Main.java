@@ -1,24 +1,31 @@
-import comporators.SymbolComparator;
-import modul.Component;
-import modul.Composite;
+import comparators.SymbolComparator;
+
 import modul.Word;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A class that demonstrates how to work with the developed classes.
+ *
+ * @author Nikita Pozniak
+ * @version 1.0 25.04.2021
+ */
 public class Main {
 
-    public static void sort(Composite composite,SymbolComparator comparator) {
-        composite.getText().sort(comparator);
-    }
-
-    public static Composite parsingText() throws FileNotFoundException {
+    /**
+     * A method that reads text from a file and splits it into words, phone numbers, and email.
+     *
+     * @return - returns a list of words in this text
+     * @throws FileNotFoundException - throw an exception if the file is missing
+     */
+    public static List<Word> parsingText() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("./target/classes/inputText.txt"));
-        Composite composite = new Composite(new ArrayList<>());
+        List<Word> text = new ArrayList<>();
+
         while (scanner.hasNextLine()){
             String line = scanner.nextLine();
 
@@ -27,16 +34,16 @@ public class Main {
             Matcher matcherMail = patternMail.matcher(line);
 
             while (matcherMail.find()) {
-                composite.add(new Word(matcherMail.group()));
+                text.add(new Word(matcherMail.group()));
                 line = line.replace(matcherMail.group(),"");
             }
 
-            String phoneRegex = "\\+\\d{3}\\(\\d{2}\\)\\d{3}-\\d{2}-\\d{2}";
+            String phoneRegex = "\\+\\d{3}\\(\\d{2}\\)\\d{3}-\\d{2}-\\d{2}\\b";
             Pattern patternPhone = Pattern.compile(phoneRegex);
             Matcher matcherPhone = patternPhone.matcher(line);
 
             while (matcherPhone.find()) {
-                composite.add(new Word(matcherPhone.group()));
+                text.add(new Word(matcherPhone.group()));
                 line = line.replace(matcherPhone.group(),"");
             }
 
@@ -45,30 +52,33 @@ public class Main {
             Matcher matcherWord = patternWord.matcher(line);
 
             while (matcherWord.find()) {
-                composite.add(new Word(matcherWord.group()));
+                text.add(new Word(matcherWord.group()));
             }
 
         }
         scanner.close();
-        return composite;
+        return text;
     }
 
-    public static void show(Composite composite){
+    /**
+     *
+     * @param text
+     */
+    public static void show(List<Word> text){
         int counter = 0;
-        for (Component component: composite.getText()) {
+        for (Word word: text) {
             if (counter == 10){
                 counter = 0;
                 System.out.println();
             }
-            System.out.print(component);
+            System.out.print(word + " ");
             counter++;
         }
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        char symbol = ' ';
-        Composite composite = parsingText();
-        sort(composite,new SymbolComparator(symbol));
-        show(composite);
+        List<Word> text = parsingText();
+        text.sort(new SymbolComparator(' '));
+        show(text);
     }
 }
