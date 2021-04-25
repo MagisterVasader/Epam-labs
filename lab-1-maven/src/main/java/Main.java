@@ -1,9 +1,9 @@
+import comparators.FlightRangeComparator;
+import filters.FuelConsumptionFilter;
 import model.Engine;
 import model.MyAirport;
 import model.Plane;
 import model.Type;
-import comparators.FlightRangeComparator;
-import filters.FuelConsumptionFilter;
 
 import java.util.List;
 import java.util.Random;

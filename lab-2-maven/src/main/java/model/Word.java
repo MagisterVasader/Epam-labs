@@ -6,7 +6,7 @@ package model;
  * @author Nikita Pozniak
  * @version 1.0 25.04.2021
  */
-public class Word{
+public class Word {
     private String word;
 
     /**
@@ -41,7 +41,7 @@ public class Word{
      * @return - number of occurrences
      */
     public long inclusion(char symbol) {
-        return word.chars().filter(ch -> ch ==symbol).count();
+        return word.chars().filter(ch -> ch == symbol).count();
     }
 
     /**

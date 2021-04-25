@@ -1,11 +1,10 @@
 import comparators.SymbolComparator;
-
 import model.MyParsing;
 import model.Word;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.List;
 
 /**
  * A class that demonstrates how to work with the developed classes.
@@ -20,10 +19,10 @@ public class Main {
      *
      * @param text Text represented as an array of words.
      */
-    public static void show(List<Word> text){
+    public static void show(List<Word> text) {
         int counter = 0;
-        for (Word word: text) {
-            if (counter == 10){
+        for (Word word : text) {
+            if (counter == 10) {
                 counter = 0;
                 System.out.println();
             }
