@@ -1,3 +1,5 @@
 Main.class
+model\MyParsing.class
 comparators\SymbolComparator.class
+model\Parsing.class
 model\Word.class
