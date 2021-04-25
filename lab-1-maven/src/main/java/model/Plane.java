@@ -47,39 +47,39 @@ public class Plane extends Transport {
         return fuelConsumption;
     }
 
-    /**
-     * Setters. Set the specified parameters
-     */
-    public void setFuelConsumption(double fuelConsumption) {
-        this.fuelConsumption = fuelConsumption;
-    }
-
     public double getFlightRange() {
         return flightRange;
-    }
-
-    public void setFlightRange(double flightRange) {
-        this.flightRange = flightRange;
     }
 
     public String getBuildDate() {
         return buildDate;
     }
 
-    public void setBuildDate(String buildDate) {
-        this.buildDate = buildDate;
-    }
-
     public Type getType() {
         return type;
     }
 
-    public void setType(Type type) {
-        this.type = type;
-    }
-
     public double getLoadCapacity() {
         return loadCapacity;
+    }
+
+    /**
+     * Setters. Set the specified parameters
+     */
+    public void setBuildDate(String buildDate) {
+        this.buildDate = buildDate;
+    }
+
+    public void setFuelConsumption(double fuelConsumption) {
+        this.fuelConsumption = fuelConsumption;
+    }
+
+    public void setFlightRange(double flightRange) {
+        this.flightRange = flightRange;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public void setLoadCapacity(double loadCapacity) {

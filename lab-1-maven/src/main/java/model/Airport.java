@@ -44,6 +44,26 @@ public abstract class Airport implements TransportBuilding {
         return name;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public int getFloors() {
+        return floors;
+    }
+
+    public double getSquare() {
+        return square;
+    }
+
+    public Plane[] getPlanes() {
+        return planes;
+    }
+
+    public String[] getContent() {
+        return content;
+    }
+
     /**
      * Setters. Set the specified parameters
      */
@@ -51,40 +71,20 @@ public abstract class Airport implements TransportBuilding {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public int getFloors() {
-        return floors;
     }
 
     public void setFloors(int floors) {
         this.floors = floors;
     }
 
-    public double getSquare() {
-        return square;
-    }
-
     public void setSquare(double square) {
         this.square = square;
     }
 
-    public Plane[] getPlanes() {
-        return planes;
-    }
-
     public void setPlanes(Plane[] planes) {
         this.planes = planes;
-    }
-
-    public String[] getContent() {
-        return content;
     }
 
     public void setContent(String[] content) {

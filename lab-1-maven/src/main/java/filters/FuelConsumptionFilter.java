@@ -34,15 +34,15 @@ public class FuelConsumptionFilter implements Filter {
         return minFuelConsumption;
     }
 
+    public double getMaxFuelConsumption() {
+        return maxFuelConsumption;
+    }
+
     /**
      * Setters. Set the specified parameters
      */
     public void setMinFuelConsumption(double minFuelConsumption) {
         this.minFuelConsumption = minFuelConsumption;
-    }
-
-    public double getMaxFuelConsumption() {
-        return maxFuelConsumption;
     }
 
     public void setMaxFuelConsumption(double maxFuelConsumption) {

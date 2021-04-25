@@ -39,6 +39,18 @@ public class Transport {
         return weight;
     }
 
+    public String[] getContent() {
+        return content;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
     /**
      * Setters. Set the specified parameters
      */
@@ -46,24 +58,12 @@ public class Transport {
         this.weight = weight;
     }
 
-    public String[] getContent() {
-        return content;
-    }
-
     public void setContent(String[] content) {
         this.content = content;
     }
 
-    public Engine getEngine() {
-        return engine;
-    }
-
     public void setEngine(Engine engine) {
         this.engine = engine;
-    }
-
-    public int getCapacity() {
-        return capacity;
     }
 
     public void setCapacity(int capacity) {
