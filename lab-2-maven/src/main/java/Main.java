@@ -1,6 +1,6 @@
 import comparators.SymbolComparator;
 
-import modul.Word;
+import model.Word;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public class Main {
      * @throws FileNotFoundException - throw an exception if the file is missing
      */
     public static List<Word> parsingText() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("./target/classes/inputText.txt"));
+        Scanner scanner = new Scanner(new File("src\\main\\resources\\inputText.txt"));
         List<Word> text = new ArrayList<>();
 
         while (scanner.hasNextLine()){
@@ -61,8 +61,9 @@ public class Main {
     }
 
     /**
+     * A method that outputs 10 words per line of text to the console.
      *
-     * @param text
+     * @param text Text represented as an array of words.
      */
     public static void show(List<Word> text){
         int counter = 0;
@@ -78,7 +79,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         List<Word> text = parsingText();
-        text.sort(new SymbolComparator(' '));
+        text.sort(new SymbolComparator('e'));
         show(text);
     }
 }

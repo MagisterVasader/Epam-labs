@@ -1,4 +1,4 @@
-package modul;
+package model;
 
 /**
  * A class that describing the word.

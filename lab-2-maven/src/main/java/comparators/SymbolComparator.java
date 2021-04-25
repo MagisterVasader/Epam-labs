@@ -1,6 +1,6 @@
 package comparators;
 
-import modul.Word;
+import model.Word;
 
 import java.util.Comparator;
 
