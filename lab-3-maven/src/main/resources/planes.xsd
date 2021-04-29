@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.example.org/planes"
+        xmlns:tns="https://www.example.org/planes" elementFormDefault="qualified">
+
+    <simpleType name="parameter">
+        <restriction base="double">
+            <minInclusive value="0"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="weapon">
+        <restriction base="double">
+            <minInclusive value="0"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="AARocket">
+        <restriction base="positiveInteger">
+            <minInclusive value="0"/>
+            <maxInclusive value="20"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="AERocket">
+        <restriction base="positiveInteger">
+            <minInclusive value="0"/>
+            <maxInclusive value="10"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="ammo">
+        <attribute name="weapon" type="tns:weapon" default="0"/>
+    </complexType>
+
+    <complexType name="support">
+        <sequence>
+            <element name="ammo" type="tns:ammo"/>
+            <element name="AARocket" type="tns:AARocket"/>
+            <element name="AERocket" type="tns:AERocket"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="destroyer">
+        <sequence>
+            <element name="ammo" type="tns:ammo"/>
+            <element name="AARocket" type="tns:AARocket"/>
+            <element name="AERocket" type="tns:AERocket"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="escort">
+        <sequence>
+            <element name="ammo" type="tns:ammo"/>
+            <element name="AARocket" type="tns:AARocket"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="sniffer">
+        <sequence>
+            <element name="ammo" type="tns:ammo"/>
+            <element name="AARocket" type="tns:AARocket"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="parameters">
+        <attribute name="length" type="tns:parameter" default="0"/>
+        <attribute name="weight" type="tns:parameter" default="0"/>
+        <attribute name="height" type="tns:parameter" default="0"/>
+    </complexType>
+
+    <complexType name="type">
+        <choice>
+            <element name="support" type="tns:support"/>
+            <element name="sniffer" type="tns:sniffer"/>
+            <element name="destroyer" type="tns:destroyer"/>
+            <element name="escort" type="tns:escort"/>
+            <element name="scout"/>
+        </choice>
+    </complexType>
+
+    <complexType name="chars">
+        <sequence>
+            <element name="type" type="tns:type"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="content">
+        <sequence>
+            <element name="model" type="string"/>
+            <element name="origin" type="string"/>
+            <element name="chars" type="tns:chars"/>
+            <element name="parameter" type="tns:parameters"/>
+            <element name="price" type="positiveInteger"/>
+        </sequence>
+        <attribute name="id" type="ID" use="required"/>
+    </complexType>
+
+    <complexType name="plane">
+        <sequence>
+            <element name="plane" maxOccurs="unbounded" type="tns:content"/>
+        </sequence>
+    </complexType>
+
+    <element name="planes" type="tns:plane"/>
+</schema>

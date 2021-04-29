@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<planes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.example.org/planes" xsi:schemaLocation="https://www.example.org/planes planes.xsd">
+
+    <plane id="p1">
+        <model>model1</model>
+        <origin>origin1</origin>
+        <chars>
+            <type>
+                <destroyer>
+                    <ammo weapon="12.7"/>
+                    <AARocket>2</AARocket>
+                    <AERocket>4</AERocket>
+                </destroyer>
+            </type>
+        </chars>
+        <parameter length="12.5" weight="5.8" height="3.2"/>
+        <price>120000</price>
+    </plane>
+
+    <plane id="p2">
+        <model>model2</model>
+        <origin>origin2</origin>
+        <chars>
+            <type>
+                <support>
+                    <ammo/>
+                    <AARocket>20</AARocket>
+                    <AERocket>10</AERocket>
+                </support>
+            </type>
+        </chars>
+        <parameter/>
+        <price>30000</price>
+    </plane>
+
+    <plane id="p3">
+        <model>model3</model>
+        <origin>origin3</origin>
+        <chars>
+            <type>
+                <escort>
+                    <ammo/>
+                    <AARocket>5</AARocket>
+                </escort>
+            </type>
+        </chars>
+        <parameter/>
+        <price>1200000</price>
+    </plane>
+
+    <plane id="p4">
+        <model>model4</model>
+        <origin>origin4</origin>
+        <chars>
+            <type>
+                <scout/>
+            </type>
+        </chars>
+        <parameter/>
+        <price>900000</price>
+    </plane>
+
+    <plane id="p5">
+        <model>model5</model>
+        <origin>origin5</origin>
+        <chars>
+            <type>
+                <sniffer>
+                    <ammo/>
+                    <AARocket>18</AARocket>
+                </sniffer>
+            </type>
+        </chars>
+        <parameter/>
+        <price>550000</price>
+    </plane>
+
+</planes>
