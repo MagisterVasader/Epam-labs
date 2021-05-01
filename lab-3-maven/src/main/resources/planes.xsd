@@ -90,14 +90,14 @@
     </complexType>
 
     <simpleType name="AARocket">
-        <restriction base="positiveInteger">
+        <restriction base="nonNegativeInteger">
             <minInclusive value="0"/>
             <maxInclusive value="20"/>
         </restriction>
     </simpleType>
 
     <simpleType name="AERocket">
-        <restriction base="positiveInteger">
+        <restriction base="nonNegativeInteger">
             <minInclusive value="0"/>
             <maxInclusive value="10"/>
         </restriction>
