@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * A class that demonstrates the use of the created classes.
+ *
+ * @author Nikita Pozniak
+ * @version 1.0 02.03.2021
+ */
 public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
 

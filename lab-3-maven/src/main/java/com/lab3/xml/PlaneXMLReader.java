@@ -15,9 +15,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A class that describes the reader of an XML file.
+ *
+ * @author Nikita Pozniak
+ * @version 1.0 02.03.2021
+ */
 public class PlaneXMLReader {
     public static final Logger LOGGER = LogManager.getLogger(PlaneXMLReader.class);
 
+    /**
+     * A method that splits an XML file by tags and generates an array of
+     * necessary data about aircraft.
+     *
+     * @param fileName a string containing the file name.
+     * @return array of planes read from the specified XML file.
+     */
     public List<Plane> read(String fileName) throws XMLStreamException {
         XMLStreamReader xmlStreamReader = null;
         try (FileInputStream fileInputStream = new FileInputStream(fileName)) {

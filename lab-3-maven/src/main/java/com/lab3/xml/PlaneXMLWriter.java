@@ -11,9 +11,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A class that describes how to write aircraft data to an XML file.
+ *
+ * @author Nikita Pozniak
+ * @version 1.0 02.03.2021
+ */
 public class PlaneXMLWriter {
     public static final Logger LOGGER = LogManager.getLogger(PlaneXMLWriter.class);
 
+    /**
+     * A method that creates an XML file and writes information about aircraft to it.
+     *
+     * @param planes   Array of planes.
+     * @param fileName a string containing the file name.
+     */
     public void write(List<Plane> planes, String fileName) throws XMLStreamException {
         String constant1 = "AARocket";
         String constant2 = "AERocket";
