@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<planes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.example.org/planes"
+        xsi:schemaLocation="https://www.example.org/planes planes.xsd">
+    <plane id="id2">
+        <model><![CDATA[model2]]></model>
+        <origin>origin2</origin>
+        <chars>
+            <type>
+                <support>
+                    <ammo></ammo>
+                    <AARocket>20</AARocket>
+                    <AERocket>10</AERocket>
+                </support>
+            </type>
+            <capacity>2</capacity>
+        </chars>
+        <parameter length="0.0" weight="0.0" height="0.0"></parameter>
+        <price>30000</price>
+    </plane>
+    <plane id="id1">
+        <model><![CDATA[model1]]></model>
+        <origin>origin1</origin>
+        <chars>
+            <type>
+                <destroyer>
+                    <ammo weapon="12.7"></ammo>
+                    <AARocket>2</AARocket>
+                    <AERocket>4</AERocket>
+                </destroyer>
+            </type>
+            <capacity>1</capacity>
+        </chars>
+        <parameter length="12.5" weight="5.8" height="3.2"></parameter>
+        <price>120000</price>
+    </plane>
+    <plane id="id5">
+        <model><![CDATA[model5]]></model>
+        <origin>origin5</origin>
+        <chars>
+            <type>
+                <sniffer>
+                    <ammo></ammo>
+                    <AARocket>18</AARocket>
+                </sniffer>
+            </type>
+            <capacity>1</capacity>
+        </chars>
+        <parameter length="0.0" weight="0.0" height="0.0"></parameter>
+        <price>550000</price>
+    </plane>
+    <plane id="id4">
+        <model><![CDATA[model4]]></model>
+        <origin>origin4</origin>
+        <chars>
+            <type>
+                <scout></scout>
+            </type>
+            <capacity>1</capacity>
+        </chars>
+        <parameter length="0.0" weight="0.0" height="0.0"></parameter>
+        <price>900000</price>
+    </plane>
+    <plane id="id3">
+        <model><![CDATA[model3]]></model>
+        <origin>origin3</origin>
+        <chars>
+            <type>
+                <escort>
+                    <ammo></ammo>
+                    <AARocket>5</AARocket>
+                </escort>
+            </type>
+            <capacity>1</capacity>
+        </chars>
+        <parameter length="0.0" weight="0.0" height="0.0"></parameter>
+        <price>1200000</price>
+    </plane>
+</planes>

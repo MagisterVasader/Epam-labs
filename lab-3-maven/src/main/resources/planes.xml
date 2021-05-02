@@ -2,7 +2,7 @@
 <planes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://www.example.org/planes" xsi:schemaLocation="https://www.example.org/planes planes.xsd">
 
-    <plane id="p1">
+    <plane id="id1">
         <model>model1</model>
         <origin>origin1</origin>
         <chars>
@@ -13,12 +13,13 @@
                     <AERocket>4</AERocket>
                 </destroyer>
             </type>
+            <capacity>1</capacity>
         </chars>
         <parameter length="12.5" weight="5.8" height="3.2"/>
         <price>120000</price>
     </plane>
 
-    <plane id="p2">
+    <plane id="id2">
         <model>model2</model>
         <origin>origin2</origin>
         <chars>
@@ -29,12 +30,13 @@
                     <AERocket>10</AERocket>
                 </support>
             </type>
+            <capacity>2</capacity>
         </chars>
         <parameter/>
         <price>30000</price>
     </plane>
 
-    <plane id="p3">
+    <plane id="id3">
         <model>model3</model>
         <origin>origin3</origin>
         <chars>
@@ -44,24 +46,26 @@
                     <AARocket>5</AARocket>
                 </escort>
             </type>
+            <capacity>1</capacity>
         </chars>
         <parameter/>
         <price>1200000</price>
     </plane>
 
-    <plane id="p4">
+    <plane id="id4">
         <model>model4</model>
         <origin>origin4</origin>
         <chars>
             <type>
                 <scout/>
             </type>
+            <capacity>1</capacity>
         </chars>
         <parameter/>
         <price>900000</price>
     </plane>
 
-    <plane id="p5">
+    <plane id="id5">
         <model>model5</model>
         <origin>origin5</origin>
         <chars>
@@ -71,6 +75,7 @@
                     <AARocket>18</AARocket>
                 </sniffer>
             </type>
+            <capacity>1</capacity>
         </chars>
         <parameter/>
         <price>550000</price>

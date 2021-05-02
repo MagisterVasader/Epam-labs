@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.example.org/planes"
-        xmlns:tns="https://www.example.org/planes" elementFormDefault="qualified">
+<schema xmlns:tns="https://www.example.org/planes" xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="https://www.example.org/planes" elementFormDefault="qualified">
 
     <element name="planes" type="tns:plane"/>
 
@@ -24,6 +24,7 @@
     <complexType name="chars">
         <sequence>
             <element name="type" type="tns:type"/>
+            <element name="capacity" type="tns:capacity"/>
         </sequence>
     </complexType>
 
@@ -37,10 +38,17 @@
         </choice>
     </complexType>
 
+    <simpleType name="capacity">
+        <restriction base="positiveInteger">
+            <minInclusive value="1"/>
+            <maxInclusive value="2"/>
+        </restriction>
+    </simpleType>
+
     <complexType name="parameters">
-        <attribute name="length" type="tns:parameter" default="0"/>
-        <attribute name="weight" type="tns:parameter" default="0"/>
-        <attribute name="height" type="tns:parameter" default="0"/>
+        <attribute name="length" type="tns:parameter" default="0.0"/>
+        <attribute name="weight" type="tns:parameter" default="0.0"/>
+        <attribute name="height" type="tns:parameter" default="0.0"/>
     </complexType>
 
     <simpleType name="parameter">
