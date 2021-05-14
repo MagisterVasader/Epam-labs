@@ -1,22 +1,12 @@
 package com.booking.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Order extends Entity{
     private Integer roomId;
-    private Comfort comfort;
-    private Integer capacity;
     private Date durationStart;
     private Date durationEnd;
     private Integer userId;
-
-    public Comfort getComfort() {
-        return comfort;
-    }
-
-    public void setComfort(Comfort comfort) {
-        this.comfort = comfort;
-    }
 
     public Date getDurationStart() {
         return durationStart;
@@ -32,14 +22,6 @@ public class Order extends Entity{
 
     public void setDurationEnd(Date durationEnd) {
         this.durationEnd = durationEnd;
-    }
-
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
     }
 
     public Integer getRoomId() {
@@ -62,10 +44,9 @@ public class Order extends Entity{
     public String toString() {
         return "Order{" +
                 "roomId=" + roomId +
-                ", comfort=" + comfort +
-                ", capacity=" + capacity +
                 ", durationStart=" + durationStart +
                 ", durationEnd=" + durationEnd +
+                ", userId=" + userId +
                 '}';
     }
 }

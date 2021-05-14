@@ -4,8 +4,6 @@ public class User extends Entity{
     private String login;
     private String password;
     private Role role;
-    private String name;
-    private String surname;
 
     public String getLogin() {
         return login;
@@ -31,28 +29,12 @@ public class User extends Entity{
         this.role = role;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "login='" + login + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

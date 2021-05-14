@@ -1,19 +1,10 @@
 package com.booking.entity;
 
 public class Room extends Entity{
-    private Integer roomId;
     private Comfort comfort;
     private Integer price;
-    private Free free;
+    private Boolean free;
     private Integer capacity;
-
-    public Integer getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
-    }
 
     public Comfort getComfort() {
         return comfort;
@@ -31,11 +22,11 @@ public class Room extends Entity{
         this.price = price;
     }
 
-    public Free getFree() {
+    public Boolean getFree() {
         return free;
     }
 
-    public void setFree(Free free) {
+    public void setFree(Boolean free) {
         this.free = free;
     }
 
@@ -50,8 +41,7 @@ public class Room extends Entity{
     @Override
     public String toString() {
         return "Room{" +
-                "roomId=" + roomId +
-                ", comfort=" + comfort +
+                "comfort=" + comfort +
                 ", price=" + price +
                 ", free=" + free +
                 ", capacity=" + capacity +

@@ -1,4 +1,4 @@
 package com.booking.service;
 
-public class Operating {
+public interface OrderService {
 }

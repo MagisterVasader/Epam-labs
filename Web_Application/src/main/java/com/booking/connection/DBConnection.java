@@ -21,7 +21,7 @@ public class DBConnection {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
-            Printable.printInfo("Connected successfully!");
+            Printable.printInfo("Server: Connected successfully!");
         } catch (SQLException e) {
             Printable.printError(e.getLocalizedMessage());
         }
