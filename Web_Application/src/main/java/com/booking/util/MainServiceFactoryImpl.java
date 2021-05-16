@@ -9,12 +9,12 @@ import com.booking.dao.mysql.BillDaoImpl;
 import com.booking.dao.mysql.OrderDaoImpl;
 import com.booking.dao.mysql.RoomDaoImpl;
 import com.booking.dao.mysql.UserDaoImpl;
+import com.booking.pool.ConnectionPool;
+import com.booking.pool.ConnectionPoolException;
 import com.booking.service.*;
-import com.booking.service.logic.UserServiceImpl;
-import com.booking.service.logic.TransactionImpl;
+import com.booking.service.logic.*;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class MainServiceFactoryImpl implements ServiceFactory {
     private Connection connection;
@@ -22,7 +22,6 @@ public class MainServiceFactoryImpl implements ServiceFactory {
     @Override
     public UserService getUserService() throws FactoryException {
         UserServiceImpl userService = new UserServiceImpl();
-        userService.setDefaultPassword("12345");
         userService.setTransaction(getTransaction());
         userService.setUserDao(getUserDao());
         return userService;
@@ -30,17 +29,26 @@ public class MainServiceFactoryImpl implements ServiceFactory {
 
     @Override
     public BillService getBillService() throws FactoryException {
-        return null;
+        BillServiceImpl billService = new BillServiceImpl();
+        billService.setTransaction(getTransaction());
+        billService.setBillDao(getBillDao());
+        return billService;
     }
 
     @Override
     public OrderService getOrderService() throws FactoryException {
-        return null;
+        OrderServiceImpl orderService = new OrderServiceImpl();
+        orderService.setTransaction(getTransaction());
+        orderService.setOrderDao(getOrderDao());
+        return orderService;
     }
 
     @Override
     public RoomService getRoomService() throws FactoryException {
-        return null;
+        RoomServiceImpl roomService = new RoomServiceImpl();
+        roomService.setTransaction(getTransaction());
+        roomService.setRoomDao(getRoomDao());
+        return roomService;
     }
 
     @Override
@@ -82,8 +90,8 @@ public class MainServiceFactoryImpl implements ServiceFactory {
     public Connection getConnection() throws FactoryException {
         if(connection == null) {
             try {
-                connection = Connector.getConnection();
-            } catch(SQLException e) {
+                connection = ConnectionPool.getInstance().getConnection();
+            } catch (ConnectionPoolException e) {
                 throw new FactoryException(e);
             }
         }

@@ -1,29 +1,21 @@
 package com.booking;
 
-import com.booking.connection.DBConnection;
 import com.booking.dao.DaoException;
-import com.booking.dao.mysql.BillDaoImpl;
-import com.booking.dao.mysql.OrderDaoImpl;
-import com.booking.dao.mysql.RoomDaoImpl;
-import com.booking.dao.mysql.UserDaoImpl;
-import com.booking.entity.Bill;
-
-import java.sql.Connection;
-import java.util.List;
+import com.booking.pool.ConnectionPoolException;
 
 public class Main {
-    public static void main(String[] args) throws DaoException {
-        Connection connection = DBConnection.getDbConnection();
-        BillDaoImpl billDao = new BillDaoImpl();
-        billDao.setConnection(connection);
-        OrderDaoImpl orderDao = new OrderDaoImpl();
-        orderDao.setConnection(connection);
-        RoomDaoImpl roomDao = new RoomDaoImpl();
-        roomDao.setConnection(connection);
-        UserDaoImpl userDao = new UserDaoImpl();
-        userDao.setConnection(connection);
+    public static void main(String[] args) throws ConnectionPoolException, DaoException {
 
         /**
+         BillDaoImpl billDao = new BillDaoImpl();
+         billDao.setConnection(pool.getConnection());
+         OrderDaoImpl orderDao = new OrderDaoImpl();
+         orderDao.setConnection(pool.getConnection());
+         RoomDaoImpl roomDao = new RoomDaoImpl();
+         roomDao.setConnection(pool.getConnection());
+         UserDaoImpl userDao = new UserDaoImpl();
+         userDao.setConnection(pool.getConnection());
+
          System.out.println(billDao.read(1));
          System.out.println(orderDao.read(1));
          System.out.println(roomDao.read(1));
@@ -79,10 +71,10 @@ public class Main {
          billDao.delete(5);
          orderDao.delete(5);
          roomDao.delete(11);
-         */
 
-        List<Bill> bills = billDao.readAll();
-        System.out.println(bills);
+         List<Bill> bills = billDao.readAll();
+         System.out.println(bills);
+         */
 
 
     }

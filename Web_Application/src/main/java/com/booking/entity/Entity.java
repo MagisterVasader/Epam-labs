@@ -5,7 +5,7 @@ import java.io.Serializable;
 public abstract class Entity implements Serializable{
     private Integer id;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
