@@ -16,9 +16,7 @@ public class UserDeleteServlet extends BaseServlet {
         Integer id = null;
         try {
             id = Integer.parseInt(req.getParameter("id"));
-        } catch (NumberFormatException e) {
-            Printable.printError(e.getLocalizedMessage(),e);
-        }
+        } catch (NumberFormatException e) { }
         if (id != null) {
             try (ServiceFactory factory = getFactory()) {
                 UserService service = factory.getUserService();
@@ -27,6 +25,7 @@ public class UserDeleteServlet extends BaseServlet {
                 throw new ServletException(e);
             }
         }
+
         try {
             resp.sendRedirect(req.getContextPath() + "/user/list.html");
         } catch (IOException e) {

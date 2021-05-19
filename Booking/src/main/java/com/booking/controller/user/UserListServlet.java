@@ -17,6 +17,7 @@ public class UserListServlet extends BaseServlet {
         try(ServiceFactory factory = getFactory()) {
             UserService service = factory.getUserService();
             List<User> users = service.readAll();
+
             req.setAttribute("users", users);
             req.getRequestDispatcher("/WEB-INF/jsp/user/list.jsp").forward(req, resp);
         } catch(Exception e) {

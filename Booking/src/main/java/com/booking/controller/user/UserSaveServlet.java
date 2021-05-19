@@ -1,6 +1,5 @@
 package com.booking.controller.user;
 
-import com.booking.Printable;
 import com.booking.controller.BaseServlet;
 import com.booking.entity.Role;
 import com.booking.entity.User;
@@ -15,32 +14,33 @@ import java.io.IOException;
 public class UserSaveServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User();
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+        Role role = null;
         try {
-            user.setId(Integer.parseInt(req.getParameter("id")));
-        } catch (NumberFormatException e) {
-            Printable.printError(e.getLocalizedMessage(), e);
-        }
-        user.setLogin(req.getParameter("login"));
+            role = Role.valueOf(req.getParameter("role"));
+        } catch (IllegalArgumentException | NullPointerException e){}
 
-        try {
-            user.setRole(Role.values()[Integer.parseInt(req.getParameter("role"))]);
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            Printable.printError(e.getLocalizedMessage(), e);
-        }
+        if (login != null && !login.isBlank() && password != null && !password.isBlank() && role != null){
+            Integer id = null;
+            try {
+                id = Integer.parseInt(req.getParameter("id"));
+            } catch (NumberFormatException e){}
 
-        if (user.getLogin() != null && user.getRole() != null) {
+            User user = new User();
+            user.setId(id);
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setRole(role);
+
             try (ServiceFactory factory = getFactory()) {
                 UserService service = factory.getUserService();
                 service.save(user);
-            } catch (Exception e) {
+            } catch (Exception e){
                 throw new ServletException(e);
             }
         }
-        try {
-            resp.sendRedirect(req.getContextPath() + "/user/list.html");
-        } catch (IOException e) {
-            Printable.printError(e.getLocalizedMessage(), e);
-        }
+
+        resp.sendRedirect(req.getContextPath() + "/user/list.html");
     }
 }

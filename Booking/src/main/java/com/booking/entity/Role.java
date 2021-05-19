@@ -1,8 +1,8 @@
 package com.booking.entity;
 
 public enum Role {
-    ADMIN("role.ADMIN"),
-    CLIENT("role.CLIENT");
+    ADMIN("Администратор"),
+    CLIENT("Клиент");
 
     private final String name;
 
@@ -16,10 +16,5 @@ public enum Role {
 
     public String getName(){
         return name;
-    }
-
-    @Override
-    public String toString() {
-        return name.split("\\.")[1];
     }
 }

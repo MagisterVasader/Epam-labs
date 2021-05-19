@@ -10,7 +10,26 @@
          metadata-complete="true">
 
     <display-name>Web Application Booking</display-name>
+    <request-character-encoding>UTF-8</request-character-encoding>
 
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.booking.controller.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>com.booking.controller.ApplicationStartListener</listener-class>
+    </listener>
+    
     <servlet>
         <servlet-name>UserListServlet</servlet-name>
         <servlet-class>com.booking.controller.user.UserListServlet</servlet-class>
@@ -21,9 +40,36 @@
         <url-pattern>/user/list.html</url-pattern>
     </servlet-mapping>
 
-    <listener>
-        <listener-class>com.booking.controller.ApplicationStartListener</listener-class>
-    </listener>
+    <servlet>
+        <servlet-name>UserEditServlet</servlet-name>
+        <servlet-class>com.booking.controller.user.UserEditServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>UserEditServlet</servlet-name>
+        <url-pattern>/user/edit.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserSaveServlet</servlet-name>
+        <servlet-class>com.booking.controller.user.UserSaveServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>UserSaveServlet</servlet-name>
+        <url-pattern>/user/save.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserDeleteServlet</servlet-name>
+        <servlet-class>com.booking.controller.user.UserDeleteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserDeleteServlet</servlet-name>
+        <url-pattern>/user/delete.html</url-pattern>
+    </servlet-mapping>
+
 
     <context-param>
         <param-name>jdbc-driver</param-name>
@@ -44,11 +90,6 @@
         <param-name>jdbc-password</param-name>
         <param-value>asaa220708</param-value>
     </context-param>
-
-    <session-config>
-        <session-timeout>30</session-timeout>
-        <tracking-mode>COOKIE</tracking-mode>
-    </session-config>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
