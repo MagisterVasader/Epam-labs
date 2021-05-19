@@ -1,10 +1,11 @@
 package com.booking.dao.mysql;
 
-import com.booking.Printable;
 import com.booking.dao.DaoException;
 import com.booking.dao.RoomDao;
 import com.booking.entity.Comfort;
 import com.booking.entity.Room;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
+    public static final Logger LOGGER = LogManager.getLogger(RoomDaoImpl.class);
+
     @Override
     public Room read(Integer id) throws DaoException {
         String sql = "SELECT `comfort`, `price`, `free`,`capacity` FROM `room` WHERE `room_id` = ?";
@@ -25,12 +28,12 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
             if (resultSet.next()) {
                 room = new Room();
                 room.setId(id);
-                room.setComfort(Comfort.valueOf(resultSet.getString("comfort")));
-                room.setPrice(resultSet.getInt("price"));
-                room.setFree(resultSet.getBoolean("free"));
-                room.setCapacity(resultSet.getInt("capacity"));
+                room.setComfort(Comfort.valueOf(resultSet.getString(1)));
+                room.setPrice(resultSet.getInt(2));
+                room.setFree(resultSet.getBoolean(3));
+                room.setCapacity(resultSet.getInt(4));
             }
-            Printable.printInfo("RoomDaoImpl: Read successfully!");
+            LOGGER.info("Read successfully!");
             return room;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -39,7 +42,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }
@@ -54,12 +57,13 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
             statement.setBoolean(3, room.getFree());
             statement.setInt(4,room.getCapacity());
             statement.executeUpdate();
+
             Integer id = null;
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
             }
-            Printable.printInfo("RoomDaoImpl: Create successfully!");
+            LOGGER.info("Create successfully!");
             return id;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -68,7 +72,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }
@@ -83,7 +87,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
             statement.setInt(4, room.getCapacity());
             statement.setInt(5, room.getId());
             statement.executeUpdate();
-            Printable.printInfo("RoomDaoImpl: Update successfully!");
+            LOGGER.info("Update successfully!");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -95,7 +99,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-            Printable.printInfo("RoomDaoImpl: Delete successfully!");
+            LOGGER.info("Delete successfully!");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -116,7 +120,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
                 room.setCapacity(resultSet.getInt("capacity"));
                 rooms.add(room);
             }
-            Printable.printInfo("RoomDaoImpl: ReadAll successfully!");
+            LOGGER.info("ReadAll successfully!");
             return rooms;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -138,7 +142,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
                 room.setCapacity(resultSet.getInt("capacity"));
                 rooms.add(room);
             }
-            Printable.printInfo("RoomDaoImpl: ReadAllFreeRooms successfully!");
+            LOGGER.info("ReadAllFreeRooms successfully!");
             return rooms;
         } catch (SQLException e) {
             throw new DaoException(e);

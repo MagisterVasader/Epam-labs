@@ -1,17 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="u" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Users list</title>
-</head>
-    <body>
+<u:html title="Список пользователей">
         <h1>Booking</h1>
-        <h2>Список пользователей</h2>
         <table>
-            <tr><th>Логин</th><th>Роль</th></tr>
+            <caption>Список пользователей</caption>
+            <tr>
+                <th scope="col">Логин</th>
+                <th scope="col">Роль</th>
+            </tr>
             <c:forEach var="user" items="${users}">
                 <c:url var="userEditUrl" value="/user/edit.html">
                     <c:param name="id" value="${user.id}"/>
@@ -25,5 +23,4 @@
         <br>
         <c:url var="userEditUrl" value="/user/edit.html"/>
         <a href="${userEditUrl}">Добавить нового пользователя</a>
-    </body>
-</html>
+</u:html>

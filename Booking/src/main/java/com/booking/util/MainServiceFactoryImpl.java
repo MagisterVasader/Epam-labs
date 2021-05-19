@@ -1,6 +1,5 @@
 package com.booking.util;
 
-import com.booking.Printable;
 import com.booking.dao.BillDao;
 import com.booking.dao.OrderDao;
 import com.booking.dao.RoomDao;
@@ -13,10 +12,14 @@ import com.booking.pool.ConnectionPool;
 import com.booking.pool.ConnectionPoolException;
 import com.booking.service.*;
 import com.booking.service.logic.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 
 public class MainServiceFactoryImpl implements ServiceFactory {
+    public static final Logger LOGGER = LogManager.getLogger(MainServiceFactoryImpl.class);
+
     private Connection connection;
 
     @Override
@@ -49,13 +52,6 @@ public class MainServiceFactoryImpl implements ServiceFactory {
         roomService.setTransaction(getTransaction());
         roomService.setRoomDao(getRoomDao());
         return roomService;
-    }
-
-    @Override
-    public Transaction getTransaction() throws FactoryException {
-        TransactionImpl transaction = new TransactionImpl();
-        transaction.setConnection(getConnection());
-        return transaction;
     }
 
     @Override
@@ -99,13 +95,20 @@ public class MainServiceFactoryImpl implements ServiceFactory {
     }
 
     @Override
+    public Transaction getTransaction() throws FactoryException {
+        TransactionImpl transaction = new TransactionImpl();
+        transaction.setConnection(getConnection());
+        return transaction;
+    }
+
+    @Override
     public void close() {
         try {
             Connection c = connection;
             connection = null;
             c.close();
         } catch(Exception e) {
-            Printable.printError(e.getLocalizedMessage(),e);
+            LOGGER.error(e);
         }
     }
 }

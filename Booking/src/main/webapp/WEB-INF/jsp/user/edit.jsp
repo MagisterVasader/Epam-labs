@@ -23,25 +23,31 @@
         <input type="hidden" name="id" value="${user.id}">
     </c:if>
     Имя пользователя:<br>
-    <input type="text" name="login" value="${user.login}"><br>
+    <label>
+        <input type="text" name="login" value="${user.login}">
+    </label><br>
     <br>
     Пароль:<br>
-    <input type="text" name="password" value="${user.password}"><br>
+    <label>
+        <input type="text" name="password" value="${user.password}">
+    </label><br>
     <br>
     Роль:<br>
-    <select name="role">
-        <c:forEach var="role" items="${roles}">
-            <c:choose>
-                <c:when test="${role == user.role}">
-                    <c:set var="selected" value="selected"/>
-                </c:when>
-                <c:otherwise>
-                    <c:remove var="selected"/>
-                </c:otherwise>
-            </c:choose>
-            <option value="${role}" ${selected}>${role.name}</option>
-        </c:forEach>
-    </select>
+    <label>
+        <select name="role">
+            <c:forEach var="role" items="${roles}">
+                <c:choose>
+                    <c:when test="${role == user.role}">
+                        <c:set var="selected" value="selected"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:remove var="selected"/>
+                    </c:otherwise>
+                </c:choose>
+                <option value="${role}" ${selected}>${role.name}</option>
+            </c:forEach>
+        </select>
+    </label>
     <br>
     <br>
     <button type="submit">Сохранить</button>

@@ -1,6 +1,7 @@
 package com.booking.pool;
 
-import com.booking.Printable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,14 +14,16 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 public final class ConnectionPool {
+    public static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
     private String jdbcUrl;
     private String jdbcUser;
     private String jdbcPassword;
     private Integer maxSize;
     private Integer validationConnectionTimeout;
 
-    private Queue<Connection> freeConnections = new ConcurrentLinkedQueue<>();
-    private Set<Connection> usedConnection = new ConcurrentSkipListSet<>(Comparator.comparingInt(Object::hashCode));
+    private final Queue<Connection> freeConnections = new ConcurrentLinkedQueue<>();
+    private final Set<Connection> usedConnection = new ConcurrentSkipListSet<>(Comparator.comparingInt(Object::hashCode));
 
     private ConnectionPool() {
     }
@@ -37,6 +40,7 @@ public final class ConnectionPool {
             for (int i = 0; i < minSize; i++) {
                 freeConnections.add(newConnection());
             }
+            LOGGER.info("Connection pool initialized");
         } catch (SQLException | ClassNotFoundException e) {
             throw new ConnectionPoolException(e);
         }
@@ -56,7 +60,7 @@ public final class ConnectionPool {
                     if (usedConnection.size() < maxSize) {
                         connection = newConnection();
                     } else {
-                        throw new ConnectionPoolException("The database connection number exceed limit.");
+                        throw new ConnectionPoolException("The database connection number exceed limit");
                     }
                 }
             } catch (SQLException e) {
@@ -64,6 +68,7 @@ public final class ConnectionPool {
             }
         }
         usedConnection.add(connection);
+        LOGGER.info("getConnection success");
         return new ConnectionWrapper(connection);
     }
 
@@ -72,12 +77,13 @@ public final class ConnectionPool {
             connection.clearWarnings();
             if (usedConnection.remove(connection)) {
                 freeConnections.add(connection);
+                LOGGER.info("freeConnection success");
             }
         } catch (SQLException e) {
             try {
                 connection.close();
             } catch (SQLException e1) {
-                Printable.printError(e1.getLocalizedMessage(),e1);
+                LOGGER.error(e1);
             }
         }
     }
@@ -91,20 +97,20 @@ public final class ConnectionPool {
                     try {
                         connection.close();
                     } catch (SQLException e) {
-                        Printable.printError(e.getLocalizedMessage(),e);
+                        LOGGER.error(e);
                     }
                 }
                 usedConnection.clear();
             }
         }
-
+        LOGGER.info("destroy success");
     }
 
     private Connection newConnection() throws SQLException {
         return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
     }
 
-    private static ConnectionPool instance = new ConnectionPool();
+    private static final ConnectionPool instance = new ConnectionPool();
 
     public static ConnectionPool getInstance() {
         return instance;

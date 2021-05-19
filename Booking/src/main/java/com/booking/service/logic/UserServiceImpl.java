@@ -1,15 +1,18 @@
 package com.booking.service.logic;
 
-import com.booking.Printable;
 import com.booking.dao.DaoException;
 import com.booking.dao.UserDao;
 import com.booking.entity.User;
 import com.booking.service.UserService;
 import com.booking.service.exception.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class UserServiceImpl extends BaseService implements UserService {
+    public static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
+
     private UserDao userDao;
 
     public void setUserDao(UserDao userDao) {
@@ -48,7 +51,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             try {
                 getTransaction().rollback();
             } catch (ServiceException e1) {
-                Printable.printError(e1.getLocalizedMessage(), e1);
+                LOGGER.error(e1);
             }
             throw new ServiceException(e);
         }

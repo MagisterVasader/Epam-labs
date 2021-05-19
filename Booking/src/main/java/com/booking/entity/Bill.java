@@ -10,11 +10,4 @@ public class Bill extends Entity {
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
-
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "totalPrice=" + totalPrice +
-                '}';
-    }
 }

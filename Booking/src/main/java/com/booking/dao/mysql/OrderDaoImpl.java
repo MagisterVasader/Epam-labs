@@ -1,9 +1,10 @@
 package com.booking.dao.mysql;
 
-import com.booking.Printable;
 import com.booking.dao.DaoException;
 import com.booking.dao.OrderDao;
 import com.booking.entity.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
+    public static final Logger LOGGER = LogManager.getLogger(OrderDaoImpl.class);
+
     @Override
     public Order read(Integer id) throws DaoException {
         String sql = "SELECT `room_id`, `duration_start`, `duration_end`, `user_id` FROM `order` WHERE `order_id` = ?";
@@ -24,12 +27,12 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             if (resultSet.next()) {
                 order = new Order();
                 order.setId(id);
-                order.setRoomId(resultSet.getInt("room_id"));
+                order.getRoom().setId(resultSet.getInt("room_id"));
                 order.setDurationStart(resultSet.getDate("duration_start"));
                 order.setDurationEnd(resultSet.getDate("duration_end"));
-                order.setUserId(resultSet.getInt("user_id"));
+                order.getUser().setId(resultSet.getInt("user_id"));
             }
-            Printable.printInfo("OrderDaoImpl: Read successfully!");
+            LOGGER.info("Read successfully!");
             return order;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -38,7 +41,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }
@@ -48,17 +51,17 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
         String sql = "INSERT INTO `order` (`room_id`,`duration_start`,`duration_end`,`user_id`) VALUES (?,?,?,?)";
         ResultSet resultSet = null;
         try (PreparedStatement statement = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setInt(1, order.getRoomId());
+            statement.setInt(1, order.getRoom().getId());
             statement.setDate(2, order.getDurationStart());
             statement.setDate(3, order.getDurationEnd());
-            statement.setInt(4, order.getUserId());
+            statement.setInt(4, order.getUser().getId());
             statement.executeUpdate();
             Integer id = null;
             resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
             }
-            Printable.printInfo("OrderDaoImpl: Create successfully!");
+            LOGGER.info("Create successfully!");
             return id;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -67,7 +70,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }
@@ -76,13 +79,13 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
     public void update(Order order) throws DaoException {
         String sql = "UPDATE `order` SET `room_id` = ? ,`duration_start` = ?, `duration_end` = ?, `user_id` = ? WHERE `order_id` = ?";
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
-            statement.setInt(1, order.getRoomId());
+            statement.setInt(1, order.getRoom().getId());
             statement.setDate(2, order.getDurationStart());
             statement.setDate(3, order.getDurationEnd());
-            statement.setInt(4, order.getUserId());
+            statement.setInt(4, order.getUser().getId());
             statement.setInt(5, order.getId());
             statement.executeUpdate();
-            Printable.printInfo("OrderDaoImpl: Update successfully!");
+            LOGGER.info("Update successfully!");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -94,7 +97,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
             statement.setInt(1, id);
             statement.executeUpdate();
-            Printable.printInfo("OrderDaoImpl: Delete successfully!");
+            LOGGER.info("Delete successfully!");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -111,13 +114,13 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
             while (resultSet.next()) {
                 Order order = new Order();
                 order.setId(resultSet.getInt("order_id"));
-                order.setRoomId(resultSet.getInt("room_id"));
+                order.getRoom().setId(resultSet.getInt("room_id"));
                 order.setDurationStart(resultSet.getDate("duration_start"));
                 order.setDurationEnd(resultSet.getDate("duration_end"));
-                order.setUserId(id);
+                order.getUser().setId(id);
                 orders.add(order);
             }
-            Printable.printInfo("OrderDaoImpl: ReadAllOrdersByUserId successfully!");
+            LOGGER.info("ReadAllOrdersByUserId successfully!");
             return orders;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -126,7 +129,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }

@@ -3,10 +3,10 @@ package com.booking.entity;
 import java.sql.Date;
 
 public class Order extends Entity{
-    private Integer roomId;
+    private Room room = new Room();
     private Date durationStart;
     private Date durationEnd;
-    private Integer userId;
+    private User user = new User();
 
     public Date getDurationStart() {
         return durationStart;
@@ -24,29 +24,19 @@ public class Order extends Entity{
         this.durationEnd = durationEnd;
     }
 
-    public Integer getRoomId() {
-        return roomId;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "roomId=" + roomId +
-                ", durationStart=" + durationStart +
-                ", durationEnd=" + durationEnd +
-                ", userId=" + userId +
-                '}';
+    public void setUser(User user) {
+        this.user = user;
     }
 }

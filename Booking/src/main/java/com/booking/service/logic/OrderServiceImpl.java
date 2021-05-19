@@ -1,15 +1,18 @@
 package com.booking.service.logic;
 
-import com.booking.Printable;
 import com.booking.dao.DaoException;
 import com.booking.dao.OrderDao;
 import com.booking.entity.Order;
 import com.booking.service.OrderService;
 import com.booking.service.exception.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class OrderServiceImpl extends BaseService implements OrderService {
+    public static final Logger LOGGER = LogManager.getLogger(OrderServiceImpl.class);
+
     private OrderDao orderDao;
 
     public void setOrderDao(OrderDao orderDao) {
@@ -39,7 +42,7 @@ public class OrderServiceImpl extends BaseService implements OrderService {
             try {
                 getTransaction().rollback();
             } catch (ServiceException e1) {
-                Printable.printError(e1.getLocalizedMessage(), e);
+                LOGGER.error(e1.getMessage(), e);
             }
             throw new ServiceException(e);
         }

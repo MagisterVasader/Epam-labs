@@ -37,14 +37,4 @@ public class Room extends Entity{
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "comfort=" + comfort +
-                ", price=" + price +
-                ", free=" + free +
-                ", capacity=" + capacity +
-                '}';
-    }
 }

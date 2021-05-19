@@ -78,7 +78,7 @@
 
     <context-param>
         <param-name>jdbc-url</param-name>
-        <param-value>jdbc:mysql://localhost:3306/web_app_epam?useUnicode=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=</param-value>
+        <param-value>jdbc:mysql://localhost:3306/web_app_epam?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=</param-value>
     </context-param>
 
     <context-param>
@@ -92,6 +92,6 @@
     </context-param>
 
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>login.html</welcome-file>
     </welcome-file-list>
 </web-app>

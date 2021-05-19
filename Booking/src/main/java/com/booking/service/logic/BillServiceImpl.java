@@ -1,15 +1,18 @@
 package com.booking.service.logic;
 
-import com.booking.Printable;
 import com.booking.dao.BillDao;
 import com.booking.dao.DaoException;
 import com.booking.entity.Bill;
 import com.booking.service.BillService;
 import com.booking.service.exception.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class BillServiceImpl extends BaseService implements BillService {
+    public static final Logger LOGGER = LogManager.getLogger(BillServiceImpl.class);
+
     private BillDao billDao;
 
     public void setBillDao(BillDao billDao) {
@@ -39,7 +42,7 @@ public class BillServiceImpl extends BaseService implements BillService {
             try {
                 getTransaction().rollback();
             } catch (ServiceException e1) {
-                Printable.printError(e1.getLocalizedMessage(),e);
+                LOGGER.error(e1.getLocalizedMessage());
             }
             throw new ServiceException(e);
         }

@@ -1,14 +1,17 @@
 package com.booking.controller;
 
-import com.booking.Printable;
 import com.booking.pool.ConnectionPool;
 import com.booking.pool.ConnectionPoolException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class ApplicationStartListener implements ServletContextListener {
+    public static final Logger LOGGER = LogManager.getLogger(ApplicationStartListener.class);
+
     @Override
     public void contextInitialized(ServletContextEvent event) {
         try {
@@ -21,7 +24,7 @@ public class ApplicationStartListener implements ServletContextListener {
             ConnectionPool pool = ConnectionPool.getInstance();
             pool.init(jdbcDriver, jdbcUrl, jdbcUser, jdbcPassword, 5, 100, 0);
         } catch (ConnectionPoolException e) {
-            Printable.printFatal("Can't initialize class " + ConnectionPool.class.getName(),e);
+            LOGGER.fatal(e);
         }
     }
 }

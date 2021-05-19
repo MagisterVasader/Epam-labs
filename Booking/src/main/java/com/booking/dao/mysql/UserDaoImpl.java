@@ -1,10 +1,11 @@
 package com.booking.dao.mysql;
 
-import com.booking.Printable;
 import com.booking.dao.DaoException;
 import com.booking.dao.UserDao;
 import com.booking.entity.Role;
 import com.booking.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl extends BaseDaoImpl implements UserDao {
+    public static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
+
     @Override
     public User read(Integer id) throws DaoException {
         String sql = "SELECT `login`, `password`, `role` FROM `user` WHERE `user_id` = ?";
@@ -29,7 +32,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(Role.valueOf(resultSet.getString("role")));
             }
-            Printable.printInfo("UserDaoImpl: Read successfully!");
+            LOGGER.info("Read successfully!");
             return user;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -38,7 +41,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }
@@ -57,7 +60,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
             }
-            Printable.printInfo("UserDaoImpl: Create successfully!");
+            LOGGER.info("Create successfully!");
             return id;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -66,7 +69,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }
@@ -80,7 +83,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             statement.setString(3, user.getRole().toString());
             statement.setInt(4, user.getId());
             statement.executeUpdate();
-            Printable.printInfo("UserDaoImpl: Update successfully!");
+            LOGGER.info("Update successfully!");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -92,7 +95,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-            Printable.printInfo("UserDaoImpl: Delete successfully!");
+            LOGGER.info("Delete successfully!");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -112,7 +115,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setRole(Role.valueOf(resultSet.getString("role")));
                 users.add(user);
             }
-            Printable.printInfo("UserDaoImpl: ReadAll successfully!");
+            LOGGER.info("ReadAll successfully!");
             return users;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -126,6 +129,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
             statement.setString(1, login);
             resultSet = statement.executeQuery();
+            LOGGER.info("ReadByLogin successfully!");
             return resultSet.next();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -134,7 +138,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }
@@ -155,6 +159,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setPassword(password);
                 user.setRole(Role.valueOf(resultSet.getString("role")));
             }
+            LOGGER.info("ReadByLoginAndPassword successfully!");
             return user;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -163,7 +168,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 assert resultSet != null;
                 resultSet.close();
             } catch (Exception e) {
-                Printable.printError(e.getLocalizedMessage(),e);
+                LOGGER.error(e);
             }
         }
     }

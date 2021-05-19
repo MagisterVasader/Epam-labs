@@ -1,9 +1,9 @@
 package com.booking.entity;
 
 public enum Comfort {
-    STANDARD("comfort.STANDARD"),
-    LUX("comfort.LUX"),
-    VIP("comfort.VIP");
+    STANDARD("Стандарт"),
+    LUX("Люкс"),
+    VIP("VIP");
 
     private final String name;
 
@@ -17,10 +17,5 @@ public enum Comfort {
 
     public String getName(){
         return name;
-    }
-
-    @Override
-    public String toString() {
-        return name.split("\\.")[1];
     }
 }

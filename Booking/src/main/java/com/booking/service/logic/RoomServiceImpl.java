@@ -1,15 +1,18 @@
 package com.booking.service.logic;
 
-import com.booking.Printable;
 import com.booking.dao.DaoException;
 import com.booking.dao.RoomDao;
 import com.booking.entity.Room;
 import com.booking.service.RoomService;
 import com.booking.service.exception.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class RoomServiceImpl extends BaseService implements RoomService {
+    public static final Logger LOGGER = LogManager.getLogger(RoomServiceImpl.class);
+
     private RoomDao roomDao;
 
     public void setRoomDao(RoomDao roomDao) {
@@ -48,7 +51,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
             try {
                 getTransaction().rollback();
             } catch (ServiceException e1) {
-                Printable.printError(e1.getLocalizedMessage(),e1);
+                LOGGER.error(e1.getLocalizedMessage(),e1);
             }
             throw new ServiceException(e);
         }
