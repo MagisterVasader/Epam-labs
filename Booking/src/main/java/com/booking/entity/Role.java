@@ -1,8 +1,8 @@
 package com.booking.entity;
 
 public enum Role {
-    ADMIN("Администратор"),
-    CLIENT("Клиент");
+    ADMIN("role.admin"),
+    CLIENT("role.client");
 
     private final String name;
 

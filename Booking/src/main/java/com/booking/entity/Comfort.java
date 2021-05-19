@@ -1,9 +1,9 @@
 package com.booking.entity;
 
 public enum Comfort {
-    STANDARD("Стандарт"),
-    LUX("Люкс"),
-    VIP("VIP");
+    STANDARD("comfort.standard"),
+    LUX("comfort.lux"),
+    VIP("comfort.vip");
 
     private final String name;
 

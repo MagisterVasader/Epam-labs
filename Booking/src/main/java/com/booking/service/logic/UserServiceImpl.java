@@ -20,6 +20,15 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    public User readByLoginAndPassword(String login, String password) throws ServiceException {
+        try {
+            return userDao.readByLoginAndPassword(login,password);
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public User readById(Integer id) throws ServiceException {
         try {
             return userDao.read(id);
