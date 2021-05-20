@@ -3,8 +3,6 @@ package com.booking.controller;
 import com.booking.entity.Role;
 import com.booking.entity.User;
 import com.booking.service.UserService;
-import com.booking.service.exception.ServiceException;
-import com.booking.util.FactoryException;
 import com.booking.util.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -17,8 +15,8 @@ import java.nio.charset.StandardCharsets;
 
 public class LoginServlet extends BaseServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        req.getRequestDispatcher("/WEB-INF/jsp/login.html");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
     }
 
     @Override
@@ -30,16 +28,16 @@ public class LoginServlet extends BaseServlet {
             try (ServiceFactory factory = getFactory()) {
                 UserService userService = factory.getUserService();
                 User user = userService.readByLoginAndPassword(login, password);
-                if (user != null && user.getRole() == Role.ADMIN) {
+                if (user != null && user.getRole() == Role.ADMIN | user.getRole() == Role.CLIENT) {
                     HttpSession session = req.getSession();
-                    session.setAttribute("session_user",user);
+                    session.setAttribute("session_user", user);
                     resp.sendRedirect(req.getContextPath() + "/index.html");
                     return;
                 }
             } catch (Exception e) {
                 throw new ServletException(e);
             }
-            resp.sendRedirect(req.getContextPath() + "/user/login.html?message=" + URLEncoder.encode("Неправильный логи или пароль", StandardCharsets.UTF_8));
         }
+        resp.sendRedirect(req.getContextPath() + "/login.html?message=" + URLEncoder.encode("Неправильный логи или пароль", StandardCharsets.UTF_8));
     }
 }
