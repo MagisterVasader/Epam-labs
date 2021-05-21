@@ -17,7 +17,7 @@ public class ApplicationStartListener implements ServletContextListener {
         try {
             ServletContext servletContext = event.getServletContext();
             String jdbcDriver = servletContext.getInitParameter("jdbc-driver");
-            String jdbcUrl    = servletContext.getInitParameter("jdbc-url");
+            String jdbcUrl = servletContext.getInitParameter("jdbc-url");
             String jdbcUser = servletContext.getInitParameter("jdbc-username");
             String jdbcPassword = servletContext.getInitParameter("jdbc-password");
 

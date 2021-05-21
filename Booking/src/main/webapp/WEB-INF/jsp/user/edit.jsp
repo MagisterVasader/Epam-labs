@@ -10,6 +10,7 @@
         <c:set var="title" value="Создание пользователя"/>
     </c:otherwise>
 </c:choose>
+
 <u:html title="${title}">
     <h1>Booking</h1>
     <h2>${title}</h2>

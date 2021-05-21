@@ -1,6 +1,6 @@
 package com.booking.entity;
 
-public class Room extends Entity{
+public class Room extends Entity {
     private Comfort comfort;
     private Integer price;
     private Boolean free;

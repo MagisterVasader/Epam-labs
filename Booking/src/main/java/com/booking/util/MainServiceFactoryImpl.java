@@ -84,7 +84,7 @@ public class MainServiceFactoryImpl implements ServiceFactory {
 
     @Override
     public Connection getConnection() throws FactoryException {
-        if(connection == null) {
+        if (connection == null) {
             try {
                 connection = ConnectionPool.getInstance().getConnection();
             } catch (ConnectionPoolException e) {
@@ -103,12 +103,14 @@ public class MainServiceFactoryImpl implements ServiceFactory {
 
     @Override
     public void close() {
-        try {
-            Connection c = connection;
-            connection = null;
-            c.close();
-        } catch(Exception e) {
-            LOGGER.error(e);
+        if (connection != null) {
+            try {
+                Connection c = connection;
+                connection = null;
+                c.close();
+            } catch (Exception e) {
+                LOGGER.error(e);
+            }
         }
     }
 }

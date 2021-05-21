@@ -1,9 +1,9 @@
 package com.booking.entity;
 
 public enum Comfort {
-    STANDARD("comfort.standard"),
-    LUX("comfort.lux"),
-    VIP("comfort.vip");
+    STANDARD("STANDARD"),
+    LUX("LUX"),
+    VIP("VIP");
 
     private final String name;
 
@@ -11,11 +11,11 @@ public enum Comfort {
         this.name = name;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return ordinal();
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 }

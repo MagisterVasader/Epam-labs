@@ -20,6 +20,15 @@ public class RoomServiceImpl extends BaseService implements RoomService {
     }
 
     @Override
+    public Room readById(Integer id) throws ServiceException {
+        try {
+            return roomDao.read(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Room> readAllFreeRooms() throws ServiceException {
         try {
             return roomDao.readAllFreeRooms();
@@ -51,7 +60,7 @@ public class RoomServiceImpl extends BaseService implements RoomService {
             try {
                 getTransaction().rollback();
             } catch (ServiceException e1) {
-                LOGGER.error(e1.getLocalizedMessage(),e1);
+                LOGGER.error(e1.getLocalizedMessage(), e1);
             }
             throw new ServiceException(e);
         }

@@ -1,40 +1,37 @@
-package com.booking.controller.user;
+package com.booking.controller.servlet.user;
 
-import com.booking.controller.BaseServlet;
+import com.booking.controller.servlet.Forward;
+import com.booking.controller.servlet.Servlet;
 import com.booking.service.UserService;
-import com.booking.util.ServiceFactory;
+import com.booking.service.exception.ServiceException;
+import com.booking.util.FactoryException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-public class UserDeleteServlet extends BaseServlet {
+public class UserDeleteServlet extends Servlet {
     public static final Logger LOGGER = LogManager.getLogger(UserDeleteServlet.class);
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
+    public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         Integer id = null;
         try {
             id = Integer.parseInt(req.getParameter("id"));
         } catch (NumberFormatException e) {
             LOGGER.error(e);
         }
+
         if (id != null) {
-            try (ServiceFactory factory = getFactory()) {
-                UserService service = factory.getUserService();
+            try {
+                UserService service = getServiceFactory().getUserService();
                 service.delete(id);
-            } catch (Exception e) {
+            } catch (FactoryException | ServiceException e) {
                 throw new ServletException(e);
             }
         }
-
-        try {
-            resp.sendRedirect(req.getContextPath() + "/user/list.html");
-        } catch (IOException e) {
-            LOGGER.error(e);
-        }
+        return new Forward("/user/list.html");
     }
 }

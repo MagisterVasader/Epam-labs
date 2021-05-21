@@ -22,8 +22,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public User readByLoginAndPassword(String login, String password) throws ServiceException {
         try {
-            return userDao.readByLoginAndPassword(login,password);
-        } catch (DaoException e){
+            return userDao.readByLoginAndPassword(login, password);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -51,7 +51,9 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             getTransaction().start();
             if (user.getId() == null) {
-                userDao.create(user);
+                if (!userDao.readByLogin(user.getLogin())) {
+                    userDao.create(user);
+                }
             } else {
                 userDao.update(user);
             }

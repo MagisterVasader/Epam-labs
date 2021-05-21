@@ -2,7 +2,7 @@ package com.booking.entity;
 
 import java.io.Serializable;
 
-public abstract class Entity implements Serializable{
+public abstract class Entity implements Serializable {
     private Integer id;
 
     public Integer getId() {

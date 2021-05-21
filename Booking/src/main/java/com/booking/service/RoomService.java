@@ -6,6 +6,8 @@ import com.booking.service.exception.ServiceException;
 import java.util.List;
 
 public interface RoomService {
+    Room readById(Integer id) throws ServiceException;
+
     List<Room> readAllFreeRooms() throws ServiceException;
 
     List<Room> readAll() throws ServiceException;

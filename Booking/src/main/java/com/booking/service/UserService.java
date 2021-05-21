@@ -10,7 +10,7 @@ public interface UserService {
 
     List<User> readAll() throws ServiceException;
 
-    User readByLoginAndPassword(String login,String password) throws ServiceException;
+    User readByLoginAndPassword(String login, String password) throws ServiceException;
 
     void save(User user) throws ServiceException;
 

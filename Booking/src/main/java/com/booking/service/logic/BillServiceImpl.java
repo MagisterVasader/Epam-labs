@@ -20,6 +20,15 @@ public class BillServiceImpl extends BaseService implements BillService {
     }
 
     @Override
+    public Bill readById(Integer id) throws ServiceException {
+        try {
+            return billDao.read(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Bill> readAll() throws ServiceException {
         try {
             return billDao.readAll();
@@ -32,8 +41,10 @@ public class BillServiceImpl extends BaseService implements BillService {
     public void save(Bill bill) throws ServiceException {
         try {
             getTransaction().start();
-            if (bill.getId() == null) {
-                billDao.create(bill);
+            if (bill.getCreate() != null) {
+                if (billDao.read(bill.getId()) == null) {
+                    billDao.create(bill);
+                }
             } else {
                 billDao.update(bill);
             }

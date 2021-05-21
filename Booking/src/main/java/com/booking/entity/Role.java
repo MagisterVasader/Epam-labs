@@ -1,8 +1,8 @@
 package com.booking.entity;
 
 public enum Role {
-    ADMIN("role.admin"),
-    CLIENT("role.client");
+    ADMIN("ADMIN"),
+    CLIENT("CLIENT");
 
     private final String name;
 
@@ -10,11 +10,11 @@ public enum Role {
         this.name = name;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return ordinal();
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 }

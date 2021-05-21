@@ -1,7 +1,8 @@
 package com.booking.dao;
 
 public class DaoException extends Exception {
-    public DaoException() {}
+    public DaoException() {
+    }
 
     public DaoException(String message, Throwable cause) {
         super(message, cause);

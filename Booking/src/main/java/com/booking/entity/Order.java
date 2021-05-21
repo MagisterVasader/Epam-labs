@@ -2,7 +2,7 @@ package com.booking.entity;
 
 import java.sql.Date;
 
-public class Order extends Entity{
+public class Order extends Entity {
     private Room room = new Room();
     private Date durationStart;
     private Date durationEnd;

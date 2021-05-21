@@ -17,7 +17,7 @@ public class TransactionImpl implements Transaction {
     public void start() throws TransactionException {
         try {
             connection.setAutoCommit(false);
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             throw new TransactionException(e);
         }
     }
@@ -27,7 +27,7 @@ public class TransactionImpl implements Transaction {
         try {
             connection.commit();
             connection.setAutoCommit(true);
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             throw new TransactionException(e);
         }
     }
@@ -37,7 +37,7 @@ public class TransactionImpl implements Transaction {
         try {
             connection.rollback();
             connection.setAutoCommit(true);
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             throw new TransactionException(e);
         }
     }

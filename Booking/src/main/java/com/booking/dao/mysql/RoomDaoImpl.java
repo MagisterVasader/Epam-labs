@@ -30,7 +30,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
                 room.setId(id);
                 room.setComfort(Comfort.valueOf(resultSet.getString(1)));
                 room.setPrice(resultSet.getInt(2));
-                room.setFree(resultSet.getBoolean(3));
+                room.setFree(resultSet.getInt(3) == 0);
                 room.setCapacity(resultSet.getInt(4));
             }
             LOGGER.info("Read successfully!");
@@ -54,8 +54,12 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
         try (PreparedStatement statement = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, room.getComfort().toString());
             statement.setInt(2, room.getPrice());
-            statement.setBoolean(3, room.getFree());
-            statement.setInt(4,room.getCapacity());
+            if (room.getFree().equals(Boolean.TRUE)) {
+                statement.setInt(3, 0);
+            } else {
+                statement.setInt(3, 1);
+            }
+            statement.setInt(4, room.getCapacity());
             statement.executeUpdate();
 
             Integer id = null;
@@ -83,7 +87,11 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
             statement.setString(1, room.getComfort().toString());
             statement.setInt(2, room.getPrice());
-            statement.setBoolean(3, room.getFree());
+            if (room.getFree().equals(Boolean.TRUE)) {
+                statement.setInt(3, 0);
+            } else {
+                statement.setInt(3, 1);
+            }
             statement.setInt(4, room.getCapacity());
             statement.setInt(5, room.getId());
             statement.executeUpdate();
@@ -116,7 +124,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
                 room.setId(resultSet.getInt("room_id"));
                 room.setComfort(Comfort.valueOf(resultSet.getString("comfort")));
                 room.setPrice(resultSet.getInt("price"));
-                room.setFree(resultSet.getBoolean("free"));
+                room.setFree(resultSet.getInt("free") == 0);
                 room.setCapacity(resultSet.getInt("capacity"));
                 rooms.add(room);
             }
@@ -129,7 +137,7 @@ public class RoomDaoImpl extends BaseDaoImpl implements RoomDao {
 
     @Override
     public List<Room> readAllFreeRooms() throws DaoException {
-        String sql = "SELECT `room_id`, `comfort`, `price`,`capacity` FROM `room` WHERE `free` = 1";
+        String sql = "SELECT `room_id`, `comfort`, `price`,`capacity` FROM `room` WHERE `free` = 0";
         try (Statement statement = getConnection().createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             List<Room> rooms = new ArrayList<>();
