@@ -17,6 +17,28 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao {
     public static final Logger LOGGER = LogManager.getLogger(OrderDaoImpl.class);
 
     @Override
+    public List<Order> readAll() throws DaoException {
+        String sql = "SELECT `order_id`, `room_id`, `duration_start`, `duration_end`, `user_id` FROM `order`";
+        try (Statement statement = getConnection().createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            List<Order> orders = new ArrayList<>();
+            while (resultSet.next()) {
+                Order order = new Order();
+                order.setId(resultSet.getInt(1));
+                order.getRoom().setId(resultSet.getInt(2));
+                order.setDurationStart(resultSet.getDate(3));
+                order.setDurationEnd(resultSet.getDate(4));
+                order.getUser().setId(resultSet.getInt(5));
+                orders.add(order);
+            }
+            LOGGER.info("ReadAll successfully!");
+            return orders;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
     public Order read(Integer id) throws DaoException {
         String sql = "SELECT `room_id`, `duration_start`, `duration_end`, `user_id` FROM `order` WHERE `order_id` = ?";
         ResultSet resultSet = null;

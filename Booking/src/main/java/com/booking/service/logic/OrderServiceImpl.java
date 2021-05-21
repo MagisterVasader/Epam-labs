@@ -20,6 +20,24 @@ public class OrderServiceImpl extends BaseService implements OrderService {
     }
 
     @Override
+    public Order readById(Integer id) throws ServiceException {
+        try {
+            return orderDao.read(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Order> readAll() throws ServiceException {
+        try {
+            return orderDao.readAll();
+        }catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Order> readAllOrdersByUserId(Integer id) throws ServiceException {
         try {
             return orderDao.readAllOrdersByUserId(id);

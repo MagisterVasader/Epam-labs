@@ -109,6 +109,7 @@ public class MainServiceFactoryImpl implements ServiceFactory {
             c.close();
         } catch(Exception e) {
             LOGGER.error(e);
+            e.printStackTrace();
         }
     }
 }

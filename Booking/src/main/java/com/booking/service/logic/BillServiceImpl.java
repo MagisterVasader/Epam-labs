@@ -20,6 +20,15 @@ public class BillServiceImpl extends BaseService implements BillService {
     }
 
     @Override
+    public Bill readById(Integer id) throws ServiceException {
+        try {
+            return billDao.read(id);
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Bill> readAll() throws ServiceException {
         try {
             return billDao.readAll();

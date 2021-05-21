@@ -1,13 +1,13 @@
 package com.booking.entity;
 
 public class Bill extends Entity {
-    private int totalPrice;
+    private Integer totalPrice;
 
-    public int getTotalPrice() {
+    public Integer getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(Integer totalPrice) {
         this.totalPrice = totalPrice;
     }
 }
