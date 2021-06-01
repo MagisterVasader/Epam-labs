@@ -3,22 +3,19 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="u" %>
 
 <u:html title="Booking Web Application">
-    <h1>Booking</h1>
-    <c:if test="${not empty param.message}">
-        <p style="color:red">${param.message}</p>
-    </c:if>
     <c:url var="loginUrl" value="/login.html"/>
-    <form action="${loginUrl}" method="post">
-        Имя пользователя:<br>
-        <label>
-            <input type="text" name="login">
-        </label><br>
-        <br>
-        Пароль:<br>
-        <label>
-            <input type="text" name="password">
-        </label><br>
-        <br>
-        <button type="submit">Войти</button>
+    <form action="${loginUrl}" method="post" style="width: 25rem;height: 100vh;margin: auto auto;display: flex;flex-direction: column;justify-content: center;">
+            <h1 style="text-align: center; font-family: Roboto,serif;">Booking</h1>
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" name="login" id="login" aria-describedby="loginHelp" placeholder="Enter Login">
+                <small id="loginHelp" class="form-text text-muted">We'll never share your login with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" name="password" id="password" placeholder="Password">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Войти</button>
     </form>
 </u:html>

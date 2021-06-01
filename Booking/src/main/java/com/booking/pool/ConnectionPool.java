@@ -24,6 +24,7 @@ public final class ConnectionPool {
 
     private final Queue<Connection> freeConnections = new ConcurrentLinkedQueue<>();
     private final Set<Connection> usedConnection = new ConcurrentSkipListSet<>(Comparator.comparingInt(Object::hashCode));
+    private static final ConnectionPool instance = new ConnectionPool();
 
     private ConnectionPool() {
     }
@@ -109,8 +110,6 @@ public final class ConnectionPool {
     private Connection newConnection() throws SQLException {
         return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
     }
-
-    private static final ConnectionPool instance = new ConnectionPool();
 
     public static ConnectionPool getInstance() {
         return instance;
